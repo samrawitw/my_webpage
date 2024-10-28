@@ -1,1 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myViz Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        h1 {
+            margin-top: 20px;
+            color: #333;
+        }
+        canvas {
+            border: 1px solid #ccc;
+            background-color: white;
+        }
+        a {
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Data Visualization Example</h1>
+    <canvas id="myChart" width="400" height="400"></canvas>
+
+    <a href="index.html">Back to Home</a>
+
+    <script>
+        const canvas = document.getElementById('myChart');
+        const ctx = canvas.getContext('2d');
+
+        // Simple bar chart data
+        const data = [12, 19, 3, 5, 2, 3];
+        const labels = ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'];
+
+        // Draw the chart
+        function drawBarChart(ctx, data, labels) {
+            const barWidth = 40;
+            const barSpacing = 20;
+            const chartHeight = 300;
+            const maxDataValue = Math.max(...data);
+            const scaleFactor = chartHeight / maxDataValue;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            data.forEach((value, index) => {
+                const barHeight = value * scaleFactor;
+                const x = index * (barWidth + barSpacing) + 40;
+                const y = canvas.height - barHeight - 30;
+
+                ctx.fillStyle = labels[index].toLowerCase();
+                ctx.fillRect(x, y, barWidth, barHeight);
+
+                ctx.fillStyle = '#000';
+                ctx.fillText(labels[index], x + 5, canvas.height - 10);
+            });
+        }
+
+        drawBarChart(ctx, data, labels);
+    </script>
+</body>
+</html>
 
